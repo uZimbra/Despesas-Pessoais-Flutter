@@ -60,13 +60,18 @@ class HomeWidget extends StatelessWidget {
                           ),
                           decoration: BoxDecoration(
                             border: Border.all(
-                              color: Colors.black,
+                              color: Colors.purple,
                               width: 2,
                             ),
                           ),
                           padding: const EdgeInsets.all(10),
                           child: Text(
                             item.value.toString(),
+                            style: const TextStyle(
+                              color: Colors.purple,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 20,
+                            ),
                           ),
                         ),
                         Column(
