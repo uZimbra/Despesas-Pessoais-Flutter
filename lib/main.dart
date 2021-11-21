@@ -41,18 +41,39 @@ class HomeWidget extends StatelessWidget {
       body: Column(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: const [
-          SizedBox(
-            width: double.infinity,
-            child: Card(
-              color: Colors.blue,
-              child: Text('Gráfico'),
-              elevation: 5,
-            ),
+        children: [
+          const Card(
+            color: Colors.blue,
+            child: Text('Gráfico'),
+            elevation: 5,
           ),
-          Card(
-            child: Text('Lista de transações'),
-          )
+          Column(
+            children: _transactions
+                .map(
+                  (item) => Card(
+                    child: Row(
+                      children: [
+                        Container(
+                          child: Text(
+                            item.value.toString(),
+                          ),
+                        ),
+                        Column(
+                          children: [
+                            Text(
+                              item.title,
+                            ),
+                            Text(
+                              item.date.toString(),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
+                )
+                .toList(),
+          ),
         ],
       ),
     );
