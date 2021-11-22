@@ -1,8 +1,6 @@
 import 'package:expenses/models/transaction.model.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
-import 'package:intl/number_symbols_data.dart';
 
 main() => runApp(const ExpensesApp());
 
@@ -11,32 +9,35 @@ class ExpensesApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp(
       home: HomeWidget(),
     );
   }
 }
 
 class HomeWidget extends StatelessWidget {
-  const HomeWidget({Key? key}) : super(key: key);
+  HomeWidget({Key? key}) : super(key: key);
+
+  final titleController = TextEditingController();
+  final valueController = TextEditingController();
+
+  final _transactions = [
+    Transaction(
+      id: 't1',
+      title: 'Novo Tênis de corrida',
+      value: 310.76,
+      date: DateTime.now(),
+    ),
+    Transaction(
+      id: 't2',
+      title: 'Conta de luz',
+      value: 246.31,
+      date: DateTime.now(),
+    ),
+  ];
 
   @override
   Widget build(BuildContext context) {
-    final _transactions = [
-      Transaction(
-        id: 't1',
-        title: 'Novo Tênis de corrida',
-        value: 310.76,
-        date: DateTime.now(),
-      ),
-      Transaction(
-        id: 't2',
-        title: 'Conta de luz',
-        value: 246.31,
-        date: DateTime.now(),
-      ),
-    ];
-
     return Scaffold(
       appBar: AppBar(
         title: const Text('Despesas Pessoais'),
@@ -106,13 +107,15 @@ class HomeWidget extends StatelessWidget {
               padding: const EdgeInsets.all(10),
               child: Column(
                 children: [
-                  const TextField(
-                    decoration: InputDecoration(
+                  TextField(
+                    controller: titleController,
+                    decoration: const InputDecoration(
                       labelText: 'Título',
                     ),
                   ),
-                  const TextField(
-                    decoration: InputDecoration(
+                  TextField(
+                    controller: valueController,
+                    decoration: const InputDecoration(
                       labelText: 'Valor (R\$)',
                     ),
                   ),
@@ -120,7 +123,10 @@ class HomeWidget extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
                       TextButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          print(titleController.text);
+                          print(valueController.text);
+                        },
                         child: const Text(
                           'Nova transação',
                           style: TextStyle(
