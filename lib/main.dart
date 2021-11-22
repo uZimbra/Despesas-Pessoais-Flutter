@@ -66,7 +66,7 @@ class HomeWidget extends StatelessWidget {
                           ),
                           padding: const EdgeInsets.all(10),
                           child: Text(
-                            item.value.toString(),
+                            'R\$ ${item.value.toStringAsFixed(2)}',
                             style: const TextStyle(
                               color: Colors.purple,
                               fontWeight: FontWeight.bold,
