@@ -6,15 +6,21 @@ import 'package:flutter/material.dart';
 
 import 'components/transaction_list.widget.dart';
 
-main() => runApp(const ExpensesApp());
+main() => runApp(ExpensesApp());
 
 class ExpensesApp extends StatelessWidget {
-  const ExpensesApp({Key? key}) : super(key: key);
+  ExpensesApp({Key? key}) : super(key: key);
+
+  final theme = ThemeData();
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      home: HomeWidget(),
+    return MaterialApp(
+      home: const HomeWidget(),
+      theme: ThemeData(
+        primarySwatch: Colors.purple,
+        colorScheme: ThemeData().colorScheme.copyWith(secondary: Colors.amber),
+      ),
     );
   }
 }
