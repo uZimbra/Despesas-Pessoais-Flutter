@@ -59,7 +59,7 @@ class _HomeWidgetState extends State<HomeWidget> {
     showModalBottomSheet(
         context: context,
         builder: (_) {
-          return TransactionForm(onSubmit: (a, b) {});
+          return TransactionForm(onSubmit: _addTransaction);
         });
   }
 
