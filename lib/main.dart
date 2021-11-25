@@ -1,26 +1,21 @@
 import 'dart:math';
 
 import 'package:expenses/components/transaction_form.widget.dart';
+import 'package:expenses/core/index.dart';
 import 'package:expenses/models/transaction.model.dart';
 import 'package:flutter/material.dart';
 
 import 'components/transaction_list.widget.dart';
 
-main() => runApp(ExpensesApp());
+main() => runApp(const ExpensesApp());
 
 class ExpensesApp extends StatelessWidget {
-  ExpensesApp({Key? key}) : super(key: key);
-
-  final theme = ThemeData();
+  const ExpensesApp({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: const HomeWidget(),
-      theme: ThemeData(
-        primarySwatch: Colors.purple,
-        colorScheme: ThemeData().colorScheme.copyWith(secondary: Colors.amber),
-      ),
+    return const MaterialApp(
+      home: HomeWidget(),
     );
   }
 }
@@ -33,19 +28,19 @@ class HomeWidget extends StatefulWidget {
 }
 
 class _HomeWidgetState extends State<HomeWidget> {
-  final _transactions = [
-    Transaction(
-      id: 't1',
-      title: 'Novo Tênis de corrida',
-      value: 310.76,
-      date: DateTime.now(),
-    ),
-    Transaction(
-      id: 't2',
-      title: 'Conta de luz',
-      value: 246.31,
-      date: DateTime.now(),
-    ),
+  final List<Transaction> _transactions = [
+    // Transaction(
+    //   id: 't1',
+    //   title: 'Novo Tênis de corrida',
+    //   value: 310.76,
+    //   date: DateTime.now(),
+    // ),
+    // Transaction(
+    //   id: 't2',
+    //   title: 'Conta de luz',
+    //   value: 246.31,
+    //   date: DateTime.now(),
+    // ),
   ];
 
   _addTransaction(String title, double value) {
@@ -76,7 +71,10 @@ class _HomeWidgetState extends State<HomeWidget> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Despesas Pessoais'),
+        title: Text(
+          'Despesas Pessoais',
+          style: AppFonts.appBarTitle,
+        ),
         actions: [
           IconButton(
             onPressed: () => _showTransactionFormModal(context),
@@ -103,6 +101,7 @@ class _HomeWidgetState extends State<HomeWidget> {
         child: const Icon(
           Icons.add,
         ),
+        backgroundColor: AppColors.secondary,
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     );
