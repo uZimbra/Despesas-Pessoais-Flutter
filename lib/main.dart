@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:expenses/components/chart.widget.dart';
 import 'package:expenses/components/transaction_form.widget.dart';
 import 'package:expenses/core/index.dart';
 import 'package:expenses/models/transaction.model.dart';
@@ -29,19 +30,43 @@ class HomeWidget extends StatefulWidget {
 
 class _HomeWidgetState extends State<HomeWidget> {
   final List<Transaction> _transactions = [
-    // Transaction(
-    //   id: 't1',
-    //   title: 'Novo Tênis de corrida',
-    //   value: 310.76,
-    //   date: DateTime.now(),
-    // ),
-    // Transaction(
-    //   id: 't2',
-    //   title: 'Conta de luz',
-    //   value: 246.31,
-    //   date: DateTime.now(),
-    // ),
+    Transaction(
+      id: 't0',
+      title: 'Conta antiga',
+      value: 400,
+      date: DateTime.now().subtract(
+        const Duration(days: 33),
+      ),
+    ),
+    Transaction(
+      id: 't1',
+      title: 'Novo Tênis de corrida',
+      value: 310.76,
+      date: DateTime.now().subtract(
+        const Duration(days: 3),
+      ),
+    ),
+    Transaction(
+      id: 't2',
+      title: 'Conta de luz',
+      value: 211.30,
+      date: DateTime.now().subtract(
+        const Duration(days: 4),
+      ),
+    ),
   ];
+
+  List<Transaction> get _recentTransactions {
+    return _transactions
+        .where(
+          (element) => element.date.isAfter(
+            DateTime.now().subtract(
+              const Duration(days: 7),
+            ),
+          ),
+        )
+        .toList();
+  }
 
   _addTransaction(String title, double value) {
     var newTransaction = Transaction(
@@ -88,11 +113,7 @@ class _HomeWidgetState extends State<HomeWidget> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            const Card(
-              color: Colors.blue,
-              child: Text('Gráfico'),
-              elevation: 5,
-            ),
+            ChartWidget(recentTransactions: _recentTransactions),
             TransactionList(transactions: _transactions),
           ],
         ),
