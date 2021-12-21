@@ -81,6 +81,7 @@ class _HomeWidgetState extends State<HomeWidget> {
             icon: const Icon(Icons.add),
           )
         ],
+        backgroundColor: AppColors.primary,
       ),
       body: SingleChildScrollView(
         physics: const ScrollPhysics(parent: BouncingScrollPhysics()),
