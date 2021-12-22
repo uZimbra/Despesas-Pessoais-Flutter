@@ -45,45 +45,29 @@ class TransactionList extends StatelessWidget {
               itemBuilder: (ctx, index) {
                 final item = transactions[index];
 
-                return Row(
-                  children: [
-                    Container(
-                      margin: const EdgeInsets.symmetric(
-                        horizontal: 15,
-                        vertical: 10,
-                      ),
-                      decoration: BoxDecoration(
-                        border: Border.all(
-                          color: AppColors.primary,
-                          width: 2,
-                        ),
-                      ),
-                      padding: const EdgeInsets.all(10),
-                      child: Text(
-                        'R\$ ${item.value.toStringAsFixed(2)}',
-                        style: TextStyle(
-                          color: AppColors.primary,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 20,
+                return Card(
+                  elevation: 5,
+                  margin:
+                      const EdgeInsets.symmetric(vertical: 8, horizontal: 6),
+                  child: ListTile(
+                    leading: CircleAvatar(
+                      backgroundColor: AppColors.primary,
+                      radius: 30,
+                      child: Padding(
+                        padding: const EdgeInsets.all(6),
+                        child: FittedBox(
+                          child: Text('R\$${item.value}'),
                         ),
                       ),
                     ),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          item.title,
-                          style: AppFonts.title,
-                        ),
-                        Text(
-                          DateFormat('d MMM y').format(item.date),
-                          style: const TextStyle(
-                            color: Colors.grey,
-                          ),
-                        ),
-                      ],
+                    title: Text(
+                      item.title,
+                      style: AppFonts.title,
                     ),
-                  ],
+                    subtitle: Text(
+                      DateFormat('d MMM y').format(item.date),
+                    ),
+                  ),
                 );
               },
             ),
