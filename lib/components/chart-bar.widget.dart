@@ -33,7 +33,7 @@ class ChartBarWidget extends StatelessWidget {
               Container(
                 decoration: BoxDecoration(
                   border: Border.all(
-                    color: Colors.grey,
+                    color: AppColors.grey,
                     width: 1,
                   ),
                   color: const Color.fromRGBO(220, 220, 220, 1),

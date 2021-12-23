@@ -58,8 +58,8 @@ class TransactionList extends StatelessWidget {
                         child: FittedBox(
                           child: Text(
                             'R\$${item.value}',
-                            style: const TextStyle(
-                              color: Colors.white,
+                            style: TextStyle(
+                              color: AppColors.white,
                             ),
                           ),
                         ),
