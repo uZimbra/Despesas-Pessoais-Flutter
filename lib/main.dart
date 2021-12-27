@@ -58,6 +58,12 @@ class _HomeWidgetState extends State<HomeWidget> {
     Navigator.of(context).pop();
   }
 
+  _removeTransaction(String id) {
+    setState(() {
+      _transactions.removeWhere((element) => element.id == id);
+    });
+  }
+
   _showTransactionFormModal(BuildContext context) {
     showModalBottomSheet(
       context: context,
@@ -89,7 +95,10 @@ class _HomeWidgetState extends State<HomeWidget> {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             ChartWidget(recentTransactions: _recentTransactions),
-            TransactionList(transactions: _transactions),
+            TransactionList(
+              transactions: _transactions,
+              onRemove: _removeTransaction,
+            ),
           ],
         ),
       ),
