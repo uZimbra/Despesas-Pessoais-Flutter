@@ -15,74 +15,70 @@ class TransactionList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: 300,
-      child: transactions.isEmpty
-          ? Column(
-              children: [
-                const SizedBox(
-                  height: 20,
-                ),
-                Text(
-                  'Nenhuma transação cadastrada!',
-                  style: AppFonts.title,
-                ),
-                const SizedBox(
-                  height: 20,
-                ),
-                SizedBox(
-                  height: 200,
-                  child: Image.asset(
-                    AppImages.waiting,
-                    fit: BoxFit.cover,
-                  ),
-                )
-              ],
-            )
-          : ListView.builder(
-              physics: const ScrollPhysics(
-                parent: BouncingScrollPhysics(),
+    return transactions.isEmpty
+        ? Column(
+            children: [
+              const SizedBox(
+                height: 20,
               ),
-              itemCount: transactions.length,
-              itemBuilder: (ctx, index) {
-                final item = transactions[index];
+              Text(
+                'Nenhuma transação cadastrada!',
+                style: AppFonts.title,
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+              SizedBox(
+                height: 200,
+                child: Image.asset(
+                  AppImages.waiting,
+                  fit: BoxFit.cover,
+                ),
+              )
+            ],
+          )
+        : ListView.builder(
+            physics: const ScrollPhysics(
+              parent: BouncingScrollPhysics(),
+            ),
+            itemCount: transactions.length,
+            itemBuilder: (ctx, index) {
+              final item = transactions[index];
 
-                return Card(
-                  elevation: 5,
-                  margin:
-                      const EdgeInsets.symmetric(vertical: 8, horizontal: 6),
-                  child: ListTile(
-                    leading: CircleAvatar(
-                      backgroundColor: AppColors.primary,
-                      radius: 30,
-                      child: Padding(
-                        padding: const EdgeInsets.all(6),
-                        child: FittedBox(
-                          child: Text(
-                            'R\$${item.value}',
-                            style: TextStyle(
-                              color: AppColors.white,
-                            ),
+              return Card(
+                elevation: 5,
+                margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 6),
+                child: ListTile(
+                  leading: CircleAvatar(
+                    backgroundColor: AppColors.primary,
+                    radius: 30,
+                    child: Padding(
+                      padding: const EdgeInsets.all(6),
+                      child: FittedBox(
+                        child: Text(
+                          'R\$${item.value}',
+                          style: TextStyle(
+                            color: AppColors.white,
                           ),
                         ),
                       ),
                     ),
-                    title: Text(
-                      item.title,
-                      style: AppFonts.title,
-                    ),
-                    subtitle: Text(
-                      DateFormat('d MMM y').format(item.date),
-                    ),
-                    trailing: IconButton(
-                      color: AppColors.red,
-                      onPressed: () => onRemove(item.id),
-                      icon: const Icon(Icons.delete),
-                    ),
                   ),
-                );
-              },
-            ),
-    );
+                  title: Text(
+                    item.title,
+                    style: AppFonts.title,
+                  ),
+                  subtitle: Text(
+                    DateFormat('d MMM y').format(item.date),
+                  ),
+                  trailing: IconButton(
+                    color: AppColors.red,
+                    onPressed: () => onRemove(item.id),
+                    icon: const Icon(Icons.delete),
+                  ),
+                ),
+              );
+            },
+          );
   }
 }

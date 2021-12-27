@@ -75,29 +75,40 @@ class _HomeWidgetState extends State<HomeWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          'Despesas Pessoais',
-          style: AppFonts.appBarTitle,
-        ),
-        actions: [
-          IconButton(
-            onPressed: () => _showTransactionFormModal(context),
-            icon: const Icon(Icons.add),
-          )
-        ],
-        backgroundColor: AppColors.primary,
+    final appBar = AppBar(
+      title: Text(
+        'Despesas Pessoais',
+        style: AppFonts.appBarTitle,
       ),
+      actions: [
+        IconButton(
+          onPressed: () => _showTransactionFormModal(context),
+          icon: const Icon(Icons.add),
+        )
+      ],
+      backgroundColor: AppColors.primary,
+    );
+    final availableHeight = MediaQuery.of(context).size.height -
+        MediaQuery.of(context).padding.top -
+        appBar.preferredSize.height;
+
+    return Scaffold(
+      appBar: appBar,
       body: SingleChildScrollView(
         physics: const ScrollPhysics(parent: BouncingScrollPhysics()),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            ChartWidget(recentTransactions: _recentTransactions),
-            TransactionList(
-              transactions: _transactions,
-              onRemove: _removeTransaction,
+            SizedBox(
+              height: availableHeight * 0.3,
+              child: ChartWidget(recentTransactions: _recentTransactions),
+            ),
+            SizedBox(
+              height: availableHeight * 0.7,
+              child: TransactionList(
+                transactions: _transactions,
+                onRemove: _removeTransaction,
+              ),
             ),
           ],
         ),
