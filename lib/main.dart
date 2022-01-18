@@ -1,4 +1,5 @@
 import 'dart:math';
+import 'dart:io';
 
 import 'package:expenses/components/chart.widget.dart';
 import 'package:expenses/components/transaction_form.widget.dart';
@@ -142,13 +143,15 @@ class _HomeWidgetState extends State<HomeWidget> {
           ],
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () => _showTransactionFormModal(context),
-        child: const Icon(
-          Icons.add,
-        ),
-        backgroundColor: AppColors.secondary,
-      ),
+      floatingActionButton: Platform.isIOS
+          ? Container()
+          : FloatingActionButton(
+              onPressed: () => _showTransactionFormModal(context),
+              child: const Icon(
+                Icons.add,
+              ),
+              backgroundColor: AppColors.secondary,
+            ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     );
   }
