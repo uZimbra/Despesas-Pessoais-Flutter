@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:expenses/core/index.dart';
 import 'package:expenses/models/transaction.model.dart';
 import 'package:flutter/material.dart';
@@ -73,11 +75,22 @@ class TransactionList extends StatelessWidget {
                   subtitle: Text(
                     DateFormat('d MMM y').format(item.date),
                   ),
-                  trailing: IconButton(
-                    color: AppColors.red,
-                    onPressed: () => onRemove(item.id),
-                    icon: const Icon(Icons.delete),
-                  ),
+                  trailing: MediaQuery.of(context).size.width > 480
+                      ? TextButton.icon(
+                          onPressed: () => onRemove(item.id),
+                          icon: const Icon(Icons.delete),
+                          label: const Text('Excluir'),
+                          style: ButtonStyle(
+                            foregroundColor: MaterialStateProperty.resolveWith(
+                              (states) => AppColors.red,
+                            ),
+                          ),
+                        )
+                      : IconButton(
+                          color: AppColors.red,
+                          icon: const Icon(Icons.delete),
+                          onPressed: () => onRemove(item.id),
+                        ),
                 ),
               );
             },
