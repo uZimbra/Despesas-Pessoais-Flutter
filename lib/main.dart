@@ -85,9 +85,16 @@ class _HomeWidgetState extends State<HomeWidget> {
         style: AppFonts.appBarTitle,
       ),
       actions: [
+        if (isLandscape)
+          IconButton(
+            icon: Icon(_showChart ? Icons.list : Icons.show_chart),
+            onPressed: () => setState(() {
+              _showChart = !_showChart;
+            }),
+          ),
         IconButton(
-          onPressed: () => _showTransactionFormModal(context),
           icon: const Icon(Icons.add),
+          onPressed: () => _showTransactionFormModal(context),
         )
       ],
       backgroundColor: AppColors.primary,
@@ -103,22 +110,22 @@ class _HomeWidgetState extends State<HomeWidget> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            if (isLandscape)
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  const Text('Exibir gráfico'),
-                  Switch(
-                    activeColor: AppColors.primary,
-                    value: _showChart,
-                    onChanged: (value) {
-                      setState(() {
-                        _showChart = value;
-                      });
-                    },
-                  ),
-                ],
-              ),
+            // if (isLandscape)
+            //   Row(
+            //     mainAxisAlignment: MainAxisAlignment.center,
+            //     children: [
+            //       const Text('Exibir gráfico'),
+            //       Switch(
+            //         activeColor: AppColors.primary,
+            //         value: _showChart,
+            //         onChanged: (value) {
+            //           setState(() {
+            //             _showChart = value;
+            //           });
+            //         },
+            //       ),
+            //     ],
+            //   ),
             if (_showChart || !isLandscape)
               SizedBox(
                 height: availableHeight * (isLandscape ? 0.7 : 0.3),
