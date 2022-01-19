@@ -26,9 +26,9 @@ class TransactionItem extends StatelessWidget {
           radius: 30,
           child: Padding(
             padding: const EdgeInsets.all(6),
-            child:  FittedBox(
+            child: FittedBox(
               child: Text(
-                'R\$${item.value}',
+                'R\$${item.value.toStringAsFixed(2)}',
                 style: TextStyle(
                   color: AppColors.white,
                 ),

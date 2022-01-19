@@ -69,6 +69,7 @@ class _HomeWidgetState extends State<HomeWidget> {
   _showTransactionFormModal(BuildContext context) {
     showModalBottomSheet(
       context: context,
+      isScrollControlled: true,
       builder: (_) {
         return TransactionForm(onSubmit: _addTransaction);
       },
